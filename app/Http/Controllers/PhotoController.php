@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\UploadPhotoRequest;
 use Illuminate\Http\Request;
 
 class PhotoController extends Controller
@@ -32,7 +33,7 @@ class PhotoController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(UploadPhotoRequest $request)
     {
         $extension = $request->file('photo')->extension();
         $path = $request->file('photo')->storeAs('images', 'my_photo.' . $extension);

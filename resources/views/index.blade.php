@@ -3,6 +3,11 @@
 @section('content')
 <form method="POST" action="/" enctype="multipart/form-data">
     {{ csrf_field() }}
+    @if ($errors->has('photo'))
+        <div class="alert alert-danger" role="alert">
+            {{ $errors->first('photo') }}
+        </div>
+    @endif
     <div class="form-group">
         <label class="custom-file">
             <input type="file" name="photo" class="custom-file-input">
