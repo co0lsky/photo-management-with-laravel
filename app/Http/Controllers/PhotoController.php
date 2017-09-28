@@ -35,8 +35,10 @@ class PhotoController extends Controller
      */
     public function store(UploadPhotoRequest $request)
     {
-        $extension = $request->file('photo')->extension();
-        $path = $request->file('photo')->storeAs('images', 'my_photo.' . $extension);
+        foreach ($request->file('photo.*') as $key => $file) {
+            $extension = $file->extension();
+            $path = $file->storeAs('images', "my_photo.$key.$extension");
+        }
 
         return view('success');
     }

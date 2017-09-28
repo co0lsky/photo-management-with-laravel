@@ -24,16 +24,16 @@ class UploadPhotoRequest extends FormRequest
     public function rules()
     {
         return [
-            'photo' => 'required|max:1024|mimes:jpeg,png'
+            'photo.*' => 'required|max:1024|mimes:jpeg,png'
         ];
     }
 
     public function messages()
     {
         return [
-            'photo.required' => 'You haven\'t choose a photo.',
-            'photo.max' => 'Your photo is too large, must be less than :max kb.',
-            'photo.mimes' => 'We only accept :values.',
+            'photo.*.required' => 'You haven\'t choose a photo.',
+            'photo.*.max' => 'Your photo is too large, must be less than :max kb.',
+            'photo.*.mimes' => 'We only accept :values.',
         ];
     }
 
