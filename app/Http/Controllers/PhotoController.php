@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\UploadPhotoRequest;
+use App\Photo;
 use Illuminate\Http\Request;
 
 class PhotoController extends Controller
@@ -30,7 +31,7 @@ class PhotoController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param UploadPhotoRequest|Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(UploadPhotoRequest $request)
@@ -38,6 +39,10 @@ class PhotoController extends Controller
         foreach ($request->file('photo.*') as $key => $file) {
             $extension = $file->extension();
             $path = $file->storeAs('images', "my_photo.$key.$extension");
+
+            $photo = new Photo();
+            $photo->path = $path;
+            $photo->save();
         }
 
         return view('success');
