@@ -15,7 +15,9 @@ class PhotoController extends Controller
      */
     public function index()
     {
-        return view('index');
+        return view('index', [
+            'photos' => Photo::all()
+        ]);
     }
 
     /**
@@ -36,9 +38,14 @@ class PhotoController extends Controller
      */
     public function store(UploadPhotoRequest $request)
     {
+        $dt = now();
         foreach ($request->file('photo.*') as $key => $file) {
             $extension = $file->extension();
-            $path = $file->storeAs('images', "my_photo.$key.$extension");
+            $path = $file->storeAs('public/images', implode('.', [
+                $dt->format('YmdHis'),
+                $key,
+                $extension
+            ]));
 
             $photo = new Photo();
             $photo->path = $path;

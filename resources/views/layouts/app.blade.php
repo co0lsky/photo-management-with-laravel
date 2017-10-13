@@ -17,7 +17,7 @@
     </style>
 </head>
 <body>
-<div class="d-flex justify-content-center align-items-center" style="height: 100%">
+<div class="d-flex justify-content-center align-items-center p-2 flex-column">
     @yield('content')
 </div>
 </body>
