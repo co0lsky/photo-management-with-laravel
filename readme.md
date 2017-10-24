@@ -9,7 +9,7 @@ Project link: [https://github.com/co0lsky/photo-management-with-laravel](https:/
 Clone the project from Github
 ~~~
 // Terminal
-git clone -b '#2_validation' https://github.com/co0lsky/photo-management-with-laravel.git photo-management
+git clone -b '#5_display_photos' https://github.com/co0lsky/photo-management-with-laravel.git photo-management
 cd photo-management
 composer install
 ~~~
