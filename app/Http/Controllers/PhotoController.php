@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Http\Requests\UploadPhotoRequest;
 use App\Photo;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
+use Intervention\Image\Facades\Image;
 
 class PhotoController extends Controller
 {
@@ -41,11 +43,17 @@ class PhotoController extends Controller
         $dt = now();
         foreach ($request->file('photo.*') as $key => $file) {
             $extension = $file->extension();
-            $path = $file->storeAs('public/images', implode('.', [
-                $dt->format('YmdHis'),
-                $key,
-                $extension
-            ]));
+
+            $path = 'public/images/' . implode('.', [
+                    $dt->format('YmdHis'),
+                    $key,
+                    $extension
+                ]);
+
+            $image = Image::make($file);
+            $image->widen(318);
+
+            Storage::put($path, (string) $image->encode());
 
             $photo = new Photo();
             $photo->path = $path;
